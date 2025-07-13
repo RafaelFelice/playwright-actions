@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [ main, master ]
 jobs:
-  e2e-test:
+  e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest #agente virtual - seria uma máquina onde roda os testes, simula o ambiente
     steps:
