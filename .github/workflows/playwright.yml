@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest #agente virtual - seria uma máquina onde roda os testes, simula o ambiente
     steps:
     - name: Checkout code
-    - uses: actions/checkout@v4 #'copia' o código do projeto e 'cola' na máquina virtual
+      uses: actions/checkout@v4 #'copia' o código do projeto e 'cola' na máquina virtual
 
     - name: Set up Node.js
-    - uses: actions/setup-node@v4 #configura o ambiente para rodar o Node.js
+      uses: actions/setup-node@v4 #configura o ambiente para rodar o Node.js
       with:
         node-version: 18
 
@@ -27,7 +27,7 @@ jobs:
       run: npx playwright test #roda os testes do Playwright
 
     - name: Generate Playwright report
-    - uses: actions/upload-artifact@v4 #faz o upload dos artefatos gerados pelos testes
+      uses: actions/upload-artifact@v4 #faz o upload dos artefatos gerados pelos testes
       if: always()
       with:
         name: playwright-report
