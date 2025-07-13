@@ -5,21 +5,29 @@ on:
   pull_request:
     branches: [ main, master ]
 jobs:
-  test:
+  e2e test:
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #agente virtual - seria uma máquina onde roda os testes, simula o ambiente
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - name: Checkout code
+    - uses: actions/checkout@v4 #'copia' o código do projeto e 'cola' na máquina virtual
+
+    - name: Set up Node.js
+    - uses: actions/setup-node@v4 #configura o ambiente para rodar o Node.js
       with:
         node-version: 18
+
     - name: Install dependencies
-      run: npm install
+      run: npm install #instala as dependências do projeto
+
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: npx playwright install --with-deps  #instala os navegadores necessários para os testes
+
     - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
+      run: npx playwright test #roda os testes do Playwright
+
+    - name: Generate Playwright report
+    - uses: actions/upload-artifact@v4 #faz o upload dos artefatos gerados pelos testes
       if: always()
       with:
         name: playwright-report
